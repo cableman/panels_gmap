@@ -1,0 +1,12 @@
+*.esproj
+*.kpf
+*.tmproj
+.cache
+.project
+.settings
+*/_notes
+nbproject
+.DS_Store
+._*
+*.patch
+*~
