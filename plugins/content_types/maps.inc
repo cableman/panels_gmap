@@ -27,6 +27,7 @@ function panels_gmap_maps_content_type_content_types() {
          'map_height' => '250',
          'map_zoom' => '14',
       ),
+      'edit form' => 'panels_gmap_maps_content_type_edit_form',
       'required context' => new ctools_context_required(t('Node'), 'node'),
     ),
   );
@@ -66,27 +67,20 @@ function panels_gmap_maps_content_type_admin_title($subtype, $conf, $context) {
 function panels_gmap_maps_content_type_edit_form(&$form, &$form_state) {
   $conf = $form_state['conf'];
   switch ($form_state['subtype_name']) {
-    case 'maps':
-      $form['maps'] = array(
-        '#type' => 'fieldset',
-        '#title' => check_plain('Google maps settings'),
-        '#collapsible' => TRUE,
-        '#collapsed' => FALSE,
-      );
-
-      $form['maps']['map_width'] = array(
+    case 'maps':      
+      $form['map_width'] = array(
         '#type' => 'textfield',
         '#title' => t('Map width in pixel'),
         '#default_value' => $conf['map_width'],
       );
 
-      $form['maps']['map_height'] = array(
+      $form['map_height'] = array(
         '#type' => 'textfield',
         '#title' => t('Map height in pixel'),
         '#default_value' => $conf['map_height'],
       );
-
-      $form['maps']['map_zoom'] = array(
+      
+      $form['map_zoom'] = array(
         '#type' => 'textfield',
         '#title' => t('Map zoom level'),
         '#default_value' => $conf['map_zoom'],
@@ -99,7 +93,7 @@ function panels_gmap_maps_content_type_edit_form(&$form, &$form_state) {
           $refs[$field['field_name']] = $field['field_name'];
         }
       }
-      $form['maps']['location_field'] = array(
+      $form['location_field'] = array(
         '#type' => 'select',
         '#title' => t('CCK location field'),
         '#options' => $refs,
@@ -107,6 +101,7 @@ function panels_gmap_maps_content_type_edit_form(&$form, &$form_state) {
       );
       break;
   }
+  return $form;
 }
 /**
  * Submit handler for the content type editing form.
